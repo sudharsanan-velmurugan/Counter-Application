@@ -1,47 +1,16 @@
 
 import "./App.css"
-const { createContext, useState, useContext, Children } = require("react");
+import AppContainer from "./Components/AppContainer"
+import CountProvider from "./Components/CounterProvider"
+import Counter from "./Components/Counter"
 
-const CountContext = createContext()
-
-
-function CountProvider ({ children }) {
-
-  const [count, setCount] = useState(0)
-
-  const increment = () => { setCount(count + 1) }
-  const decrement = () => { setCount(count - 1) }
-
-  return (
-    <CountContext.Provider value={{ count, increment, decrement }}>
-      {children}
-    </CountContext.Provider>
-  )
-}
-
-// function useCount(){
-//   const context = useContext(CountContext)
-//   return context
-// }
-
-const Counter = () => {
-  const {count, increment, decrement} = useContext(CountContext)
-  return (
-    <div className="counter-container">
-      <h1 >{count}</h1>
-      <button className="button" onClick={increment}>+</button>
-      <button className="button" onClick={decrement}>-</button>
-    </div>
-  )
-}
 const App = () => {
   return (
     <div className="app-container" >
-      <h1 className="title">Counter Application</h1>
-      <p className="sub-description">A simple counter app using Context API</p>
+      <AppContainer/>
       <CountProvider>
-        <Counter/>
-      </CountProvider>
+          <Counter/>
+        </CountProvider>
     </div>
   )
 }
